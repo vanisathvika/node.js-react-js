@@ -1,13 +1,12 @@
-//inmport express for creating API'S endpoints
-const express=require("express")
-const path=require("path")
-const fs=require("fs")
-const user=require("./database.json");
-const port=5050;
-const hostname="localhost";
+// Import express for creating API's endpoints
+const express = require("express");
+const path = require('path');
+const fs = require("fs");
+const users = require("./database.json");
 var database;
 var token="wrong key";
-//Read database.json file
+
+// Read database.json file 
 fs.readFile("database.json", function(err, data) { 
     
     // Check for errors 
@@ -18,18 +17,21 @@ fs.readFile("database.json", function(err, data) {
 }); 
 
 
-// Import jwt's for API's endpoints authentication
+// Import jwt for API's endpoints authentication
 const jwt = require("jsonwebtoken");
 
-// Creates an Express application, initiate express top level function
+// Creates an Express application, initiate
+// express top level function
 const app = express();
 
-
+// A port for serving API's
+const port = 3000;
 
 // Allow json data
 app.use(express.json());
 
-app.get('/',(req, res) => {
+app.get('/',
+    (req, res) => {
         res.sendFile(__dirname + '/login.html');
     });
 
@@ -124,9 +126,8 @@ app.post('/login',(req, res) => {
 		res.redirect("/login")
 		});
 
-
-//listen the server
-app.listen(port,hostname,(req,res)=>{
-console.log(`server is running:http://${hostname}:${port}/`);
-
+// Listen the server
+app.listen(port, () => {
+	console.log(`Server is running : 
+	http://localhost:${port}/`);
 });
